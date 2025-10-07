@@ -43,6 +43,13 @@ else
     });
 }
 
+// Aplicar migrations automaticamente ao iniciar a aplicação
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<RHContext>();
+    db.Database.Migrate();
+}
+
 app.UseHttpsRedirection();
 
 app.UseCors();
